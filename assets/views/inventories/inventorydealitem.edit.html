@@ -1,0 +1,67 @@
+﻿<div ng-controller="inventorydealitemCtrl as ideali" ng-init="app.layout.isSidebarClosed=true">
+    <div >
+        <a class="btn btn-wide btn-red btn-scroll btn-scroll-top ti-back-left  pull-right" ng-click="Back()">
+            <span translate="main.BACK"></span>
+        </a>
+    </div>
+    <h1 class="mainTitle" translate="tittle.INVENTORYDEALITEM" translate-values="{ appName: app.name }"  >{{ mainTitle }}</h1>
+    <div class="panel panel-white"  ng-hide="ShowObject==true" >
+        <div class="panel-body">
+            <form role="form">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span translate="main.COMPANY"></span><br />
+                    <select class="form-control text-uppercase" ng-options="q.id as q.Name for q in companies |orderBy: '+Name'| filter: {isActiveValue: 'true'}" ng-model="item.CompanyID"></select>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span translate="main.VALIDFROM">Tarih :</span><br />
+                    <span><input id="ValidFrom" type="text" class="form-control" ng-model="item.ValidFrom" readonly ng-click="DateValidFrom()" required></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span translate="main.VALIDTO">Tarih :</span><br />
+                    <span><input id="ValidTo" type="text" class="form-control" ng-model="item.ValidTo" readonly ng-click="DateValidTo()" required></span>
+                </div>
+                <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                    <span translate="main.DISCOUNT">indirim :</span><br />
+                    <input id="Discount " type="text" class="form-control" ng-model="item.Discount " placeholder="">
+                </div>
+                <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                    <span translate="main.PAYMENTTERM">vade :</span><br />
+                    <input id="PaymentTerm" type="text" class="form-control" ng-model="item.PaymentTerm" placeholder="">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span translate="main.STORE"></span><br />
+                    <multi-select-tree class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12" data-input-model="Stores" multi-select="true"
+                                       data-output-model="item.Stores" data-default-label="Restoran Seçimi . . ."
+                                       data-callback="selectOnly1Or2(data, item.Stores)" ng-disabled="item.storegroups.length"></multi-select-tree>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ng-disabled="item.stores.length">
+                    <span translate="main.STOREGROUP"></span><br />
+                    <multi-select-tree class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12" data-input-model="StoreGroups" multi-select="true"
+                                       data-output-model="item.StoreGroups" data-default-label="Restoran Group Seçimi . . ."
+                                       data-callback="selectOnly1Or2(item, selectedItems)"></multi-select-tree>
+                </div>
+                <div class="col-sm-12 col-lg-12 col-md-12 col-xs-12 margin-top-10">
+                    <button class="btn btn-danger btn-wide btn-scroll btn-scroll-left fa ti-close pull-right" ng-show="$stateParams.id !== 'new'" ng-click="removedata(item.id)">
+                        <span>{{:: delete}}</span>
+                    </button>
+                    <button class="btn btn-primary btn-wide btn-scroll btn-scroll-left fa  fa-save pull-left" ng-click="SaveData()">
+                        <span>{{:: save}}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+   
+    <div class="panel panel-white table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="InventoryDealID != 'new'" ng-hide="ShowObject==true">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="table-responsive">
+                    <div class="demo-container">
+                        <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+    </div>
+</div>

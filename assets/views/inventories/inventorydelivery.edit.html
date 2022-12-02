@@ -1,0 +1,91 @@
+﻿<div ng-controller="inventorydeliveryeditCtrl as de" ng-init="app.layout.isSidebarClosed=true">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-10">
+                    <span class="mainTitle text-dark text-uppercase" style="font-size:25px;" translate="tittle.INVENTORYDELIVERYITEMS" translate-values="{ appName: app.name }">{{ mainTitle }}</span><br /><br />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 margin-top-10 visible-lg visible-md">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                    <a class="btn btn-wide btn-red btn-scroll btn-scroll-top ti-back-left margin-right-10 pull-right" ng-click="Back()">
+                        <span translate="main.BACK"></span>
+                    </a>
+                </div>
+            </div>
+            <div print-remove class="col-sm-2 col-xs-2 margin-top-5 pull-right visible-sm visible-xs">
+                <a class="btn btn-red ti-back-left pull-right" ng-click="Back()"></a>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 panel panel-white">
+            <div class="panel-body">
+                <form name="userForm" role="form">
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label class="text-bold">{{:: documentnumber}}</label> &nbsp;<span class="symbol required"></span>
+                        <input id="DocumentNumber" type="text" class="form-control text-capitalize" ng-model="item.DocumentNumber" placeholder="" required>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label>{{:: documenttype}}</label><br />
+                        <select class="form-control text-uppercase ng" ng-model="item.DocumentTypeID" ng-options="q.Value as q.Name for q in documenttypes | orderBy:'+Name'"></select>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label class="text-bold">{{:: companyy}}</label> &nbsp;<span class="symbol required"></span>
+                        <select id="company" ng-options="q.id as q.Name for q in company | orderBy:'+Name' | filter: {isActiveValue: 'true'}" class="form-control text-uppercase ng" ng-model="item.CompanyID"></select>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label>{{:: repository}}</label>
+                        <select class="form-control text-uppercase ng" data-ng-options="q.id as q.fullname for q in repositories| orderBy:'+fullname' " data-ng-model="item.RepositoryID"></select>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label>{{:: description}}</label><br />
+                        <textarea type="text" style='min-height:60px; max-width:340px; max-height:100px' class="form-control text-uppercase" ng-model="item.Description" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label>{{:: paymentterm}}</label><br />
+                        <input id="PaymentTerm" type="text" class="form-control" ng-model="item.PaymentTerm" placeholder="">
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label>{{:: datetime}}</label><br />
+                        <input id="Date" type="text" class="form-control ng" ng-model="item.DeliveryDate" datepicker-popup="dd-MM-yyyy" readonly ng-click="datepopup(item.DeliveryDate)" required>
+                    </div>
+                    <div class="form-group col-sm-6 col-lg-3 col-md-3 col-xs-12">
+                        <label class="margin-left-30">{{:: ispaid}}</label><br />
+                        <input class="margin-left-30" type="checkbox" ng-model="item.isPaid" style="width:33px; height:33px;">
+                    </div>
+                    <div class="form-group col-sm-12 col-lg-12 col-md-12 col-xs-12">
+                        <div class="col-sm-4 col-lg-4 col-md-4 col-xs-4 pull-left">
+                            <button class="btn btn-primary btn-wide btn-scroll btn-scroll-left fa  fa-save pull-left" ng-disabled="SaveButtonActive == false || !item.DocumentNumber || !item.CompanyID" ng-click="SaveData()">
+                                <span>{{:: save}}</span>
+                            </button>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 col-md-4 col-xs-4 center" ng-if="ShowInventoryInvoiceButton==true">
+                            <button class="btn btn-warning btn-wide btn-o btn-scroll btn-scroll-left fa ti-close center" ng-if="$stateParams.id !== 'new'" ng-click="CreatInvoice(item)">
+                                <span>{{:: assigntoinvoice}}</span>
+                            </button>
+                            <button class="btn btn-warning btn-wide btn-o btn-scroll btn-scroll-left fa ti-check center" ng-if="$stateParams.id !== 'new' && ShowSentInventoryInvoiceButton == true" ng-click="SendNetsisDeliveryInvoice()">
+                                <span class='fa fa-spin fa-spinner' ng-if='isSpinner == true'></span><span ng-if="isSpinner != true">{{:: send}}</span>
+                            </button>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 col-md-4 col-xs-4 pull-right">
+                            <button class="btn btn-danger btn-wide btn-scroll btn-scroll-left fa ti-save pull-right" ng-if="$stateParams.id !== 'new' && user.restrictions.inventorydeliveryeditDelete=='Enable'" ng-click="removedata(item.id)">
+                                <span>{{:: delete}}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-white table-responsive col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="InventoryDeliveryID != 'new'" ng-hide="ShowObject==true">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive">
+                        <div class="demo-container">
+                            <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</div>

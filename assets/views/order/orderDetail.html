@@ -1,0 +1,444 @@
+﻿<!--<style>
+    [class*="col-"] {
+        background-color: #eee;
+        background-color: rgba(84,41,124,.15);
+        border: 1px solid #ddd;
+        border: 1px solid rgba(84,41,124,.2);
+    }
+</style>-->
+<style>
+    input[type='checkbox'] {
+        display: none;
+    }
+
+    .wrap-collabsible {
+        margin: 1.2rem 0;
+    }
+
+    .lbl-toggle {
+        display: block;
+        font-weight: bold;
+        font-family: monospace;
+        font-size: 1.0rem;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 0.5rem;
+        color: #DDD;
+        background: #0069ff;
+        cursor: pointer;
+        border-radius: 19px;
+        transition: all 0.25s ease-out;
+    }
+
+    .lbl-toggle:hover {
+        color: #FFF;
+    }
+
+    .lbl-toggle::before {
+        content: ' ';
+        display: inline-block;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid currentColor;
+        vertical-align: middle;
+        margin-right: .7rem;
+        transform: translateY(-2px);
+        transition: transform .2s ease-out;
+    }
+
+    .toggle:checked+.lbl-toggle::before {
+        transform: rotate(90deg) translateX(-3px);
+    }
+
+    .collapsible-content {
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height .25s ease-in-out;
+    }
+
+    .toggle:checked+.lbl-toggle+.collapsible-content {
+        max-height: 350px;
+    }
+
+    .toggle:checked+.lbl-toggle {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .collapsible-content .content-inner {
+        background: rgba(0, 105, 255, .2);
+        border-bottom: 1px solid rgba(0, 105, 255, .45);
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+        padding: .5rem 1rem;
+    }
+
+    .collapsible-content p {
+        margin-bottom: 0;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 5px;
+        font-size: 11px;
+        width: 100px;
+        text-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+
+
+    .blink {
+        animation: blink-animation 1s steps(5, start) infinite;
+        -webkit-animation: blink-animation 5s steps(5, start) infinite;
+color:red;
+      }
+      @keyframes blink-animation {
+        to {
+          visibility: hidden;
+        }
+      }
+      @-webkit-keyframes blink-animation {
+        to {
+          visibility: hidden;
+        }
+      }
+@media (max-width: 760px) {
+/* Dropdown Button */
+.orderdetails {
+ font-size: 21px;
+}
+}
+@media (max-width: 760px) {
+/* Dropdown Button */
+.orderdetailstable {
+ top: -25px;
+}
+}
+
+</style>
+<div ng-controller="orderdetailsCtrl" class="panel-white col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 margin-top-10">
+            <span class="text-blue">{{Date}}</span><br />
+            <!--<span class="text-bold text-large" ng-if="item.orderInvoice.id">{{::efatura}} ID : {{:: item.orderInvoice.id}}</span>-->
+        </div>
+        <h3>
+            <span class="orderdetails col-lg-8 col-md-8 col-sm-8 col-xs-8 text-bold margin-top-15 center">{{:: orderdetails}}</span>
+        </h3>
+        <a class="btn btn-wide btn-red btn-scroll btn-scroll-top ti-back-left pull-right col-lg-1 col-md-2 col-sm-2 col-xs-2 visible-lg"
+            ng-click="Back()">
+            <span>{{:: back}}</span>
+        </a>
+        <div class="col-md-1 margin-top-5 pull-right visible-md visible-sm visible-xs">
+            <a class="btn btn-red ti-back-left pull-right" ng-click="Back()"></a>
+        </div>
+        <div class="dropdown  pull-right col-lg-2 col-md-2 col-sm-2 col-xs-2 visible-lg" style="    right: -49px;
+            top: -31px;">
+            <button class="dropbtn">İşlemler</button>
+            <!-- <button  ng-if="user.restrictions.yemeksepetistats=='Enable'" class="dropbtn">İşlemler</button> -->
+            <div class="dropdown-content">
+                <!-- <a href="#" ng-click="SendToFiyuu(item.id)" ng-if="userRestrictions.sendtofiyuu=='Enable'">{{:: sendtofiyuu }}</a> -->
+                <a href="#" ng-click="DeleteYSMaping(item.id)" ng-if="userRestrictions.deleteysmaping=='Enable' && item.OrderSource == 'YemekSepeti'">{{::
+                    deleteysmaping}}</a>
+                <a href="#" ng-click="repeatOrder(item.id)" ng-if="(item.OrderTypeID==2 || item.OrderTypeID==7) && userRestrictions.repeatorder=='Enable'">{{::
+                    repeatorder}}</a>
+                <a href="#" ng-click="OrderChange(item)" ng-if="userRestrictions.changeorder=='Enable'">{{:: changetoorder}}</a>
+                <a href="#" ng-click="CheckCode(item,'CancelOrder')" ng-if="userRestrictions.cancelorder=='Enable'">{{:: canceltoorder}}</a>
+                <a href="#" ng-click="SelectPromotions(item)" ng-if="userRestrictions.addpromotion=='Enable'">{{:: addpromotion}}</a>
+                <a href="#" ng-click="RePrintOrder(item.id)" ng-if="userRestrictions.reprintorder=='Enable'">{{:: reprint}}</a>
+                <a href="#" ng-click="CheckCode(item,'OrderPaymentDeteails')" ng-if="userRestrictions.changeorderpayment=='Enable'">{{:: changetopaymenttype}}</a>
+                <!-- <a href="#" ng-click="AwaitingCCAutorization(item)">{{:: acceptorder}}</a> -->
+                <a href="#" ng-click="UpdateOrderStateChoose(item)" ng-if="userRestrictions.chooseorderstate=='Enable'">{{:: chooseorderstate}}</a>
+                <a href="#" ng-click="UpdateOrderPaymentStatusChoose(item.id)" ng-if="userRestrictions.closeorderpayment=='Enable'">{{:: closeorderpayment}}</a>
+                <a href="#" ng-click="UpdateOrderStatusAdmin(item.id)" ng-if="userRestrictions.canceltoorder=='Enable'">{{:: canceltoorder}}</a>
+                <a href="#" ng-click="UpdateCode()" ng-if="userRestrictions.updatecode=='Enable'">{{:: updatecode}}</a>
+                <a href="#" ng-click="RefreshOrder(item.id)"  ng-if="userRestrictions.refreshorderamount=='Enable'">{{:: refreshorderamount}}</a>
+                <!--        
+                <a href="#" ng-click="RevertToPrevState(item.id)" >{{:: reverttoprevstate}}</a>
+                <a href="#" ng-click="SendGiftPromotions(item.id)">{{:: sendgifpromotions }}</a>
+                -->
+            </div>
+        </div>
+        <div class="dropdown  col-md-1 margin-top-5 pull-right visible-md visible-sm visible-xs" ng-if="userRestrictions.orderdetailsdropdown=='Enable'">
+            <button class="dropbtn btn btn-green ti-menu-alt pull-right"></button>
+            <div class="dropdown-content">
+                <!-- <a href="#" ng-click="SendToFiyuu(item.id)" ng-if="userRestrictions.sendtofiyuu=='Enable'">{{:: sendtofiyuu }}</a> -->
+                <a href="#" ng-click="DeleteYSMaping(item.id)" ng-if="userRestrictions.deleteysmaping=='Enable' && item.OrderSource == 'YemekSepeti'">{{::
+                    deleteysmaping}}</a>
+                <a href="#" ng-click="repeatOrder(item.id)" ng-if="(item.OrderTypeID==2 || item.OrderTypeID==7) && userRestrictions.repeatorder=='Enable'">{{::
+                    repeatorder}}</a>
+                <a href="#" ng-click="OrderChange(item)" ng-if="userRestrictions.changeorder=='Enable'">{{:: changetoorder}}</a>
+                <a href="#" ng-click="CheckCode(item,'CancelOrder')" ng-if="userRestrictions.cancelorder=='Enable'">{{:: canceltoorder}}</a>
+                <a href="#" ng-click="SelectPromotions(item)" ng-if="userRestrictions.addpromotion=='Enable'">{{:: addpromotion}}</a>
+                <a href="#" ng-click="RePrintOrder(item.id)" ng-if="userRestrictions.reprintorder=='Enable'">{{:: reprint}}</a>
+                <a href="#" ng-click="CheckCode(item,'OrderPaymentDeteails')" ng-if="userRestrictions.changeorderpayment=='Enable'">{{:: changetopaymenttype}}</a>
+                <!-- <a href="#" ng-click="AwaitingCCAutorization(item)">{{:: acceptorder}}</a> -->
+                <a href="#" ng-click="UpdateOrderStateChoose(item)" ng-if="userRestrictions.chooseorderstate=='Enable'">{{:: chooseorderstate}}</a>
+                <a href="#" ng-click="UpdateOrderPaymentStatusChoose(item.id)" ng-if="userRestrictions.closeorderpayment=='Enable'">{{:: closeorderpayment}}</a>
+                <a href="#" ng-click="UpdateOrderStatusAdmin(item.id)" ng-if="userRestrictions.canceltoorder=='Enable'">{{:: canceltoorder}}</a>
+                <a href="#" ng-click="UpdateCode()" ng-if="userRestrictions.updatecode=='Enable'">{{:: updatecode}}</a>
+                <a href="#" ng-click="RefreshOrder(item.id)"  ng-if="userRestrictions.refreshorderamount=='Enable'">{{:: refreshorderamount}}</a>
+                <!--          
+                 <a href="#" ng-click="RevertToPrevState(item.id)" >{{:: reverttoprevstate}}</a>
+                 <a href="#" ng-click="SendGiftPromotions(item.id)">{{:: sendgifpromotions }}</a>
+                 -->
+            </div>
+        </div>
+    </div>
+    <div class="orderdetailstable col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive" style="    top: -12px;">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 row pull-left margin-top-15 table-responsive">
+            <div class="col-sm-12">
+                <table>
+                    <tr style="  background-color: #f5f5f5;">
+                        <th style="    width: 75px;">{{:: orderno}}</th>
+                        <th>{{:: ordernumber}}</th>
+                        <th>{{:: ordertype}}</th>
+                        <th>{{:: ordersource}}</th>
+                        <th>{{:: personname}}</th>
+                    </tr>
+                    <tr>
+                        <td>{{:: item.id}}</td>
+                        <td>{{:: item.OrderNumber}} {{:: item.StoreTable.name}}</td>
+                        <td>{{:: item.OrderType}}</td>
+                        <td>{{:: item.OrderSource}}</td>
+                        <td>{{item.Alias}}{{item.persons[0].Person}}</td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr style="  background-color: #f5f5f5;">
+                        <th>{{:: amount}}</th>
+                        <th>{{:: orderstate}}</th>
+                        <th>{{:: paymentstatus}}</th>
+                        <th>{{:: paymenttype}}</th>
+                    </tr>
+                    <tr>
+                        <td>{{:: item.Amount | number : 2}}</td>
+                        <td>{{:: item.OrderState}}</td>
+                        <td>{{:: item.PaymentStatus}}</td>
+                        <td ng-dblclick="CheckCode(item,'ChangeOrderPayment')">{{:: item.PaymentType.PaymentType.name}}
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr style="  background-color: #f5f5f5;">
+                        <th>{{:: isChargedd}}</th>
+                        <th>{{:: orderdate}}</th>
+                        <th>{{:: LastStateDate}}</th>
+                        <th>{{:: deliverydate}}</th>
+                        <th>{{:: agent}}</th>
+                       
+                    </tr>
+                    <tr>
+                        <td style="width: 100px;">
+                            <input ng-if="item.OrderTypeID == 2 && item.isCharged == false"
+                                ng-class="{'text-red': item.isCharged == false}" type="text" placeholder="-"
+                                value="{{::open}}" id="form-field-21" class="form-control" style="height: 24px;background-color: white; text-align: center;" readonly>
+                            <input ng-if="item.OrderTypeID == 2 && item.isCharged == true" type="text" placeholder="-"
+                                value="{{::close}}" id="form-field-21" class="form-control" readonly>
+                            <input ng-if="item.OrderTypeID != 2 && item.OrderTypeID != 7" type="text" placeholder="-"
+                                value="-" id="form-field-21" class="form-control" readonly>
+
+                            <input ng-if="item.OrderTypeID == 7 && item.isCharged == false"
+                                ng-class="{'text-red': item.isCharged == false}" type="text" placeholder="-"
+                                value="{{::open}}" id="form-field-21" class="form-control" readonly>
+                            <input ng-if="item.OrderTypeID == 7 && item.isCharged == true" type="text" placeholder="-"
+                                value="{{::close}}" id="form-field-21" class="form-control" readonly>
+                        </td>
+                        <td>{{:: item.OrderDate | date:'HH:mm:ss dd-MM-yyyy'}}</td>
+                        <td>{{:: item.LastStateDate | date:'HH:mm:ss dd-MM-yyyy'}}</td>
+                        <td>{{:: item.DeliveryDate | date:'HH:mm:ss dd-MM-yyyy'}}</td>
+                        <td>{{:: User}}</td>
+                       
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr style="  background-color: #f5f5f5;">
+                        <th>{{:: store}}</th>
+                        <th>{{:: storetype}}</th>
+                        <th>{{:: storephone}}</th>
+                        <th>{{:: servicestime}}</th>
+                        <th>{{:: storenote}}</th>
+                    </tr>
+                    <tr>
+                        <td>{{:: StoreData.name}} / {{:: StoreData.Town}}</td>
+                        <td>{{:: StoreData.StoreType}}</td>
+                        <td>{{:: StoreData.phone}}</td>
+                        <td>{{:: StoreData.ServiceTime}}</td>
+                        <td>{{:: StoreData.notes}}</td>
+                    </tr>
+                </table> <br>
+                <table>
+                    <tr style="  background-color: #f5f5f5;">
+                        <th style="color: red;">{{:: ordernote}}</th>
+                    </tr>
+                    <tr>
+                        <td><span class="blink">{{:: item.OrderNote}}</span></td>
+                    </tr>
+                </table>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row visible-lg">
+                        <div class="dx-viewport demo-container">
+                            <div id="form-container">
+                                <div id="form1" dx-form="OrderAddress">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row visible-md visible-sm visible-xs">
+                        <div class="dx-viewport demo-container">
+                            <div id="form-container">
+                                <div id="form1" dx-form="OrderAddress">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 row pull-right margin-top-15 table-responsive">
+            <div class="col-sm-12  table-responsive">
+                <div class="panel panel-white" id="panel5">
+                    <div class="panel-heading" style="padding: 6px;min-height: 26px;">
+                        <h4 class="panel-title text-primary ng" ng-click="collapse =! collapse">{{::orderitemdetails}}
+                            <label class="pull-right text-red text-bold text-extra-large"></label>
+                        </h4>
+                    </div>
+                    <div collapse="panel1" ng-hide="collapse" class="panel-wrapper">
+                        <div class="panel-body" style="padding: 0px;">
+                            <div class="row panel-body" style="padding: 0px;">
+                                <div class="panel-body" style="padding: 5px;">
+                                    <div id="treeViewContainer" dx-tree-list="dataGridOptionsorder">
+                                    </div>
+                                    <span class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                        <span class=" pull-right margin-top-10 margin-left-5" style="font-size: 13px; color: #2d2c2c;"> <label translate="main.GRANDTOTAL" style=" color: #2d2c2c;"></label> : <label class="margin-left-5" style=" color: #2d2c2c;"> {{ item.Amount | number : 2}} {{:: 'main.CURRENCY_SYMBOL' | translate}}</label></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-white" id="panel5">
+                    <div class="panel-heading" style="padding: 6px;min-height: 26px;">
+                        <h4 class="panel-title text-primary ng" ng-click="collapse2 =! collapse2">{{::satates}}
+                            <label class="pull-right text-red text-bold text-extra-large"></label>
+                        </h4>
+                    </div>
+                    <div collapse="panel2" ng-hide="collapse2" class="panel-wrapper">
+                        <div class="panel-body" style=" padding: 0px;">
+                            <div class="row panel-body" style="    font-size: 12px;    padding: 5px;">
+                                <div id="gridContainerstate" dx-data-grid="dataGridOptionsstate">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-white" id="panel5">
+                    <div class="panel-heading" style="padding: 6px;min-height: 26px;">
+                        <h4 class="panel-title text-primary ng" ng-click="collapse4 =! collapse4">{{::payment}}
+                            <label class="pull-right text-red text-bold text-extra-large"></label>
+                        </h4>
+                    </div>
+                    <div collapse="panel4" ng-hide="collapse4" class="panel-wrapper">
+                        <div class="panel-body" style=" padding: 0px;">
+                            <div class="row panel-body" style="    font-size: 12px;    padding: 5px;">
+                                <table>
+                                    <tr style="  background-color: #f5f5f5;">
+                                        <th>{{:: paymenttype}}</th>
+                                        <th>{{:: date}}</th>
+                                        <th>{{:: amount}}</th>
+                                        <th>OKC</th>
+                                    </tr>
+                                    <tr ng-repeat="payment in item.payments track by payment.id">
+                                        <td>{{:: payment.PaymentType}}</td>
+                                        <td>{{:: payment.PaymentDate |
+                                            date:'HH:mm:ss dd-MM-yyyy'}}</td>
+                                        <td>{{:: payment.Amount |
+                                            number:2}}</td>
+                                        <td ng-if="payment.isAutomatic == true">OKC</td>
+                                </table>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-white" id="panel3">
+                    <div class="panel-heading" style="padding: 6px;min-height: 26px;">
+                        <h4 class="panel-title text-primary ng" ng-click="collapse3 =! collapse3">{{::promotions}}
+                            <label class="pull-right text-red text-bold text-extra-large"></label>
+                        </h4>
+                    </div>
+                    <div collapse="panel3" ng-hide="collapse3" class="panel-wrapper">
+                        <div class="panel-body" style=" padding: 0px;">
+                            <div class="row panel-body" style="    font-size: 12px;    padding: 5px;">
+                                <table>
+                                    <tr style="  background-color: #f5f5f5;">
+                                        <th>{{:: promotionname}}</th>
+                                        <th>{{:: promotioncode}}</th>
+                                    </tr>
+                                    <tr ng-repeat="code in item.promotions track by code.id">
+                                        <td>{{::code.Promotion.name}} / ({{:: code.Amount | number:2}})</td>
+                                        <td>{{:: code.Code}}</td>
+                                        <td> <label class='col-lg-4 col-md-4 col-sm-4 col-xs-6 ng pull-right'>
+                                                <i ng-click="RemovePromotion( code.OrderID)"
+                                                    class='ti-close text-extra-large text-bold'></i></td>
+                                        </label>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-sm-12">
+                    <div class="panel panel-white" id="panel5">
+                        <div class="panel-heading" style="padding: 6px;min-height: 26px;">
+                            <h4 class="panel-title text-primary ng" ng-click="collapse5 =! collapse5">{{::storedetails}}
+                                <label class="pull-right text-red text-bold text-extra-large"></label>
+                            </h4>
+                        </div>
+                        <div collapse="panel5" ng-if="collapse5" class="panel-wrapper">
+                            <div class="panel-body" style="padding: 0px;">
+                                <div class="row panel-body" style="    font-size: 12px;    padding: 5px;">
+                                    <table>
+                                        <tr>
+                                            <th>{{:: store}}</th>
+                                            <th>{{:: storetype}}</th>
+                                            <th>{{:: storephone}}</th>
+                                            <th>{{:: servicestime}}</th>
+                                            <th>{{:: storenote}}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{:: StoreData.name}} / {{:: StoreData.Town}}</td>
+                                            <td>{{:: StoreData.StoreType}}</td>
+                                            <td>{{:: StoreData.phone}}</td>
+                                            <td>{{:: StoreData.ServiceTime}}</td>
+                                            <td>{{:: StoreData.notes}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+        </div>
+    </div>
+</div>

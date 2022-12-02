@@ -1,0 +1,43 @@
+﻿<div ng-controller="inventorycountlistCtrl as ic" ng-keyup="event=$event" ng-init="app.layout.isSidebarClosed=false">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-10">
+                <span class="mainTitle text-dark" style="font-size:25px;" translate="tittle.INVENTORYCOUNT" translate-values="{ appName: app.name }">{{ mainTitle }}</span><br /><br />
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 visible-lg visible-md">
+            <div print-remove class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-10">
+                <div class="dx-fieldset col-lg-3">
+                    <div class="dx-field-label" translate="main.FROMDATE">From Date</div>
+                    <div class="dx-field-value">
+                        <div dx-date-box="DateRange.fromDate"></div>
+                    </div>
+                </div>
+                <div class="dx-fieldset col-lg-3">
+                    <div class="dx-field-label" translate="main.TODATE">To Date</div>
+                    <div class="dx-field-value">
+                        <div dx-date-box="DateRange.toDate"></div>
+                    </div>
+                </div>
+                <div class="dx-fieldset col-lg-3">
+                    <div dx-button="reportButtonOptions"></div>
+                    <div dx-button="addNewButtonOptions"></div>
+                </div>
+                
+            </div>
+    
+        </div>
+        <div id="report" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-15 table-responsive" ng-hide="isWaiting==true">
+            <!--<div id="sales-chart" dx-chart="chartOptions"></div>-->
+            <!--<div dx-button="resetButtonOptions"></div>-->
+            <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="InventoryCount">
+                <div data-options="dxTemplate: {name: 'detail'}">
+                    <!-- <div class="master-detail-caption">{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div> -->
+                   <!--  <div dx-data-grid="getDetailGridSettings(delivery.key)"></div> -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+ 
+</div>

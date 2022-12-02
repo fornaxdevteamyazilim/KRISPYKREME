@@ -1,0 +1,115 @@
+﻿<style>
+    #advgridContainer td {
+        vertical-align: middle;
+    }
+
+    #advgridContainer .chart-cell {
+        overflow: visible;
+    }
+
+    #advgridContainer .current-value {
+        display: table-cell;
+        ;
+    }
+
+    #advgridContainer .diff {
+        position: relative;
+        display: table-cell;
+    }
+
+    #advgridContainer .inc .diff {
+        color: #2ab71b;
+    }
+
+    #advgridContainer .inc .diff:before {
+        content: '+';
+    }
+
+    #advgridContainer .dec .diff:before {
+        content: '-';
+    }
+
+    #advgridContainer .dec .diff {
+        color: #f00;
+    }
+
+    #advgridContainer .inc .diff:after,
+    #advgridContainer .dec .diff:after {
+        content: '';
+        display: block;
+        height: 10px;
+        width: 10px;
+        position: absolute;
+        right: -12px;
+        top: 3px;
+        background-repeat: no-repeat;
+        background-size: 10px 10px;
+    }
+
+    #advgridContainer .inc .diff:after {
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADKSURBVHjaYtTaLs1ABEiG0nPRJa56PEHhsxBhmCUQT4OyrwHxcXyKmQgYJgHE64CYDYrXQcXIMhCbAcgWkGzgNKh38QUB0QamIUUErkhKI9ZAGyCeTERkTYaqxWsgKA2txhdG6GGsvUNGGpeBRMUiGhCFGsqGzUBQQJsxkA5AemaiG5hDIBIIgQSgK0FmMDACs549kN5FZLjhA7+A2A2U9YSAOBeLAk4gnoBDczoOcSFGPIUDPxB/wCHHiKtwYGKgMhg1cBAaCBBgAJTUIL3ToPZfAAAAAElFTkSuQmCC');
+    }
+
+    #advgridContainer .dec .diff:after {
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADJSURBVHjaYvzPgBfgkhYA4o8QFahKmBioDEYNHIQGsgBxIBCLkqgvAYi/g1mMjMjir0EJzR6If/6HpChKMMgMe3DKBeIcKhiY8x/MYoDj+RQYNgdkGLqBbEB8kgzDToL1YjEQhKWB+BUJhj0H64Eahs1AELYhMpJ+gtUiGYbLQBBOI8LANLBaIg1kAAc0vkiAqSPBQFAkHcNi2DGoHMkGgrAENOCRI0ECRQ2JBoKwJTQCfkLZDPgMZPxPXN5NhtJzMSsJVBMAAgwAyWSY2svfmrwAAAAASUVORK5CYII=');
+    }
+</style>
+
+<div print-section ng-controller="shiftplanactualeditCtrl as spi" ng-init="app.layout.isSidebarClosed=true">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div print-only class="visible-print hidden col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-left">
+                <span class="col-lg-12 text-bold pull-left">{{user.Store.Member}} - {{user.Store.name}}</span><br />
+                <span class="col-lg-12 text-bold pull-left">{{user.FullName}} </span><br />
+                <span class="col-lg-12 text-bold pull-left">{{'main.WEEK' |translate}} : {{item.PeriodWeek}}
+                </span><br />
+                <span class="col-lg-12 text-bold pull-left">{{'main.YEAR' |translate}} : {{item.PeriodYear}}
+                </span><br />
+                <span class="col-lg-12 text-bold pull-left">{{'main.DATERANGE' |translate}} : {{item.DateRange}}
+                </span><br />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 margin-top-10">
+                <span class="text-bold text-dark" style="font-size:18px;" translate="tittle.SHIFTPLANITEM"
+                    translate-values="{ appName: app.name }">{{ mainTitle }}</span><br />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-right">
+                <span class="col-lg-12 pull-right">{{Time | date:'dd-MM-yyyy HH:mm'}} </span><br />
+            </div>
+        </div>
+        <div print-remove class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-10">
+                    <span class="mainTitle text-dark text-uppercase" style="font-size:25px;"
+                        translate="tittle.SHIFTPLANITEM" translate-values="{ appName: app.name }">{{ mainTitle
+                        }}</span><br /><br />
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 margin-top-10 visible-lg visible-md">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                    <a class="btn btn-wide btn-red btn-scroll btn-scroll-top ti-back-left margin-right-10 pull-right"
+                        ng-click="Back()">
+                        <span translate="main.BACK"></span>
+                    </a>
+                </div>
+            </div>
+            <div print-remove class="col-sm-2 col-xs-2 margin-top-5 pull-right visible-sm visible-xs">
+                <a class="btn btn-red ti-back-left pull-right" ng-click="GoBack()"></a>
+            </div>
+        </div>
+    </div>
+    <div id="report" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-15 table-responsive"
+        ng-hide="isWaiting==true">
+        <tabset justified="true" class="tabbable">
+            <tab heading="{{'main.SHIFTPLANITEM' | translate}}">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div id="gridContainer" dx-data-grid="dataGridOptions" dx-item-alias="ShiftPlanItem">
+
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+    </div>
+</div>

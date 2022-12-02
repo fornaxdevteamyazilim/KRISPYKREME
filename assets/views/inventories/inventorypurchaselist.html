@@ -1,0 +1,27 @@
+﻿<div ng-controller="inventorypurchaselistCtrl as ip" ng-keyup="event=$event" ng-init="app.layout.isSidebarClosed=false">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <div class="col-lg-12 col-md-12 col-sm-8 col-xs-8 margin-top-10">
+                <span class="mainTitle text-dark" style="font-size:25px;" translate="tittle.INVENTORYPURCHASE" translate-values="{ appName: app.name }">{{ mainTitle }}</span><br /><br />
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 margin-top-10">
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 pull-right">
+                <a class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-plus pull-right" href="#/app/inventory/inventorypurchase/edit/new" ng-if="user.restrictions.addnewinventorypurchase =='Enable' && addnewPurchase == true">
+                    <span translate="main.ADDNEWPURCHASE"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="user.restrictions.checkInventoryDemandApproval =='Enable'"> 
+        
+        </div>
+    </div>
+    <fieldset class="panel panel-white">      
+        <div class="table-responsive">
+            <div class="demo-container">
+                <div dx-button="resetButtonOptions"></div>
+                <div id="gridContainer" dx-data-grid="dataGridOptions"></div>
+            </div>
+        </div>
+    </fieldset>
+</div>

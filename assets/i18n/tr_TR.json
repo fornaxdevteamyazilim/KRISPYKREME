@@ -294,8 +294,8 @@
     "INDEXIMPORT": "{{appName}} - Index Upload ",
     "DECLAREDREVENUEELIST": "{{appName}} - Beyan Edilen Gelir Listesi",
     "STORESALESBUDGETLIST": "{{appName}} -  Resturant Satış Bütce listesi",
-    "NGSETTINGITEM": "{{appName}} - CRISPYCREME Parametre Tanımları",
-    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : "{{appName}} - CRISPYCREME API Servislerine Bağlantınız Kesilmiştir !",
+    "NGSETTINGITEM": "{{appName}} - CORS Ayarlar",
+    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : "{{appName}} - ROPING API Servislerine Bağlantınız Kesilmiştir !",
     "INVENTORYPERIDICCOST": "{{appName}} - Dönemsel Maliyetler",
     "USERPRODUCTSALES": "{{appName}} - Kullanıcı - Ürün Satış Listesi",
     "DEMANDRULEDEFINITION": "{{appName}} - Talep Kuralları Tanımı",
@@ -389,7 +389,6 @@
     "VOIDORDERS": "{{appName}} - İptal Sipariş Raporu",
     "PODSREPORT": "{{appName}} - POD Raporu",
     "PRODUCTGROUPSTRIKERATE": "{{appName}} - Ürün Grubu Satış Oranı",
-    "PRODUCTSALESSUMMARY": "{{appName}} - Ürün Satış Özeti",
     "PROMOTIONCODEDETAILS": "{{appName}} - Promosyon Kod Detayları",
     "SALESBYSOURCE": "{{appName}} - Kanal Bazlı Satış",
     "SCORECARD": "{{appName}} - Score Card",
@@ -1289,7 +1288,7 @@
     "STATETIME": "Bekleme Süresi",
     "YEAR": "Yıl",
     "MOUNTH": "Ay",
-    "ROPNGUNIT": "CRISPYCREME Birimi",
+    "ROPNGUNIT": "CORS Birimi",
     "ROP6UNIT": "Rop6 Birimi",
     "INVENTORYUNITMATCHING": "Malzeme Birim Eşleştirme",
     "STORELOACATIONS": "Restoran Konumu",
@@ -1505,7 +1504,7 @@
     "MEDIAALIAS": "Medya Takma İsim",
     "AUDITMEDIA": "Bildirim Ortamı",
     "SELECT": "Seç",
-    "ROPNGPERSONINFO": "CRISPYCREME Kişi Bilgileri",
+    "ROPNGPERSONINFO": "CORS Kişi Bilgileri",
     "YEMEKSEPETIPERSONINFO": "Yemek Sepeti Kişi Bilgileri",
     "MERGE": "Eşleştir",
     "SEARCHNAME": "İsim Bul",
@@ -1544,7 +1543,7 @@
     "JUSTPRODUCT": "Tek satılanları göster !",
     "YSPRODUCTID": " Ys Ürün Id",
     "YSPRODUCTNAME": "Ys Ürün İsmi",
-    "ROPNGPRODUCTNAME": "CRISPYCREME Ürün İsmi",
+    "ROPNGPRODUCTNAME": "CORS Ürün İsmi",
     "MULTIPLAYER": "Multiplayer",
     "MAPOPTIONSLEVEL": "Map Options Level",
     "MAPOPTIONSLEVEL2": "Map Options Level 2",
@@ -1568,7 +1567,7 @@
     "STAFFORDERS": "Personel Yemekleri ",
     "ROUTEDORDERTYPE": "Yönlendirilen Sipariş Tipi",
     "ACCOUNTING": "Muhasebe",
-    "ROPSTOREID": "CRISPYCREME Restoran ID",
+    "ROPSTOREID": "CORS Restoran ID",
     "YUMSTOREID": "Yum Restoran ID",
     "STOREINDEX": "Şube Kodu",
     "ACOHPCODE": "Masraf Merkezi",
@@ -1795,7 +1794,7 @@
     "SEARCHBYSETTINGNAME": "Başlığa Göre Ara !",
     "SETTINGNAME": "Başlık",
     "SETTINGVALUE": "Değer",
-    "ADDSETTINGITEM": "Ng Parametre Ekle",
+    "ADDSETTINGITEM": "Ng Ayar Ekle",
     "DONOTFORGETTOASKMARKETTINGQUESTION": "Pazarlama Sorusunu Sormayı Unutma !",
     "WASTE": "Atık",
     "WASTEFOODCOST": "Atık",
@@ -1822,7 +1821,7 @@
     "ORDERSOURCENAME": "Sipariş Kaynağı İsmi",
     "ADDCODE": "Kod Ekle",
     "YSPAYMENTTYPENAME": "Ys Ödeme Tipi",
-    "ROPNGPAYMENTTYPENAME": "CRISPYCREME Ödeme Tipi",
+    "ROPNGPAYMENTTYPENAME": "CORS Ödeme Tipi",
     "ADDUNIT": "Birim Ekle",
     "INVENTORYCODE": "Envanter Kodu",
     "FIRSTTIMEZONETL": "I. Zaman Aralığı (TL)",
@@ -1872,7 +1871,7 @@
     "COMPANYITEMCODE": "Firma Kodu",
     "CUSTOMERNAME": "Müşteri İsmi",
     "YSSTORENAME": "YS Restoranı",
-    "ROPNGSTORENAME": "CRISPYCREME Restoranı",
+    "ROPNGSTORENAME": "CORS Restoranı",
     "MAPDATE": "Eşleşme Tarihi",
     "ORDERRDATE": "Sipariş Tarihi",
     "YSORDERSTATE": "YS Sipariş Durumu",
@@ -1905,7 +1904,7 @@
     "CREATEMATERIALSLIP": "Fişleri Oluştur",
     "SENDCREATNETSISALL": "Fişleri Oluştur Aktar !",
     "ENDDAY": "Gün Sonu",
-    "ROPNGORDERDATE": "CRISPYCREME Sipariş Tarihi",
+    "ROPNGORDERDATE": "CORS Sipariş Tarihi",
     "YSORDERRDATE": "YS Sipariş Tarihi",
     "CALLAGAIN": "Tekrar Ara",
     "ISREACHED": "Ulaşıldı/Ulaşılamadı",
@@ -2345,7 +2344,7 @@
     "GLOVOORDERS": "Glovo Siparişleri",
     "GETIRORDERS": "Getir Siparişleri",
     "TRENDYOL": "Trendyol Siparişleri",
-    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : " CRISPYCREME API Servislerine Bağlantınız Kesilmiştir ! (CTRL + F5 Yapar mısınız !!)",
+    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : " CORS API Servislerine Bağlantınız Kesilmiştir ! (CTRL + F5 Yapar mısınız !!)",
     "ORDERNUMBERPREFIX": "Sipariş Numarası Başlangıç",
     "GIFTPROMOTIONBLACKLIST": "Hediye Promosyon Kara Liste",
     "PROMOTIONSETTING": "Otomatik Promosyon Ayarları",
@@ -2393,7 +2392,7 @@
     "YSSTATUS": "YEMEK SEPETİ",
     "GETIRSTATUS": "GETİR",
     "TRENDYOLSTATUS": "TRENDYOL",
-    "ROPNGTIME": "CRISPYCREME Saati",
+    "ROPNGTIME": "CORS Saati",
     "PREWWEEK": "Geçen Hafta",
     "LASTDAY": "Önceki Gün",
     "PREVMONTH": "Geçen Ay",
@@ -2423,7 +2422,6 @@
     "USEDDATE": "Kullanım Tarihi",
     "PROMOTIONCODEDETAILS": "Promosyon Kod Detayları",
     "PRODUCTGROUPSTRIKERATE": "Ürün Grubu Satış Oranı",
-    "PRODUCTSALESSUMMARY": "Ürün Satış Özeti",
     "FSRREPORTS": "Fsr",
     "SOSREPORTS": "Sos",
     "AUDIT": "Denetim",
@@ -2448,7 +2446,7 @@
     "TRENDYOLAMOUNT": "Trendyol TL",
     "TRENDYOLPERCENT": "Trendyol %",
     "YSORDERNUMBER": "Ys Sip. Id",
-    "ROPNGORDERNUMBER": "CRISPYCREME Sip. Id",
+    "ROPNGORDERNUMBER": "CORS Sip. Id",
     "JUSTKVKK": "Sadece KVKK Onaylı",
     "CLOSEALL": "Tümünü Kapat",
     "GETIRRESTORANPAKET": "Getir_RestoranPaket",
@@ -2858,7 +2856,6 @@
         "VOIDORDERS": "İptal Sipariş Raporu",
         "PROMOTIONCODEDETAILS": "Promosyon Kod Detayları",
         "PRODUCTGROUPSTRIKERATE": "Ürün Grubu Satış Oranı",
-        "PRODUCTSALESSUMMARY": "Ürün Satış Özeti",
         "SALESBYSOURCE": "Kanal Bazlı Satış",
         "SCORECARD": "Score Card",
         "DELIVERYU30": "30 Dk. Altı",
@@ -3017,8 +3014,8 @@
         "ACCOUNTTRANSACTIONSTYPE": "Kasa Giriş/Çıkış İşlem Tipleri",
         "PREDEFINEDNOTE": "Tanımlı Notlar",
         "YEMEKSEPETIREJECTREASON": "Yemek Sepeti Red Sebepleri",
-        "NGSETTINGITEM": "CRISPYCREME Parametre Tanımları",
-        "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : " CRISPYCREME API Servislerine Bağlantınız Kesilmiştir !",
+        "NGSETTINGITEM": "CORS Ayar Tanımları",
+        "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" : " CORS API Servislerine Bağlantınız Kesilmiştir !",
         "SETTINGITEM": "Düzenleme Araçları",
         "SURVEURESULT": "Anket Sonuç Tanımları",
         "STAFFTYPE": "Personel Tipleri",
@@ -3042,8 +3039,7 @@
         "orders": "Onay Bekleyen Siparişler",
         "mapping": "Getir - Eşleştirmeler",
         "trendyolmapping": "Trendyol - Eşleştirmeler",
-        "storeaggregatorstatus": "Restoran Entegrasyon Ayarları",
-        "AggregatorStoreStatus": "Entegrasyon Ayarları"
+        "storeaggregatorstatus": "Restoran Entegrasyon Ayarları"
       },
       "specialoperations": {
         "MAIN": "Özel Operasyonlar",
@@ -3893,13 +3889,13 @@
     "dailyTarget": "Günlük Hedef"
   },
   "SignalR": {
-    "ConnectionOk": "CRISPYCREME sunucu bağlantısı kuruldu.",
-    "ConnectionInfo": "CRISPYCREME sunucu bağlantısı: ",
-    "ConnectionLost": "CRISPYCREME sunucu bağlantı koptu: ",
+    "ConnectionOk": "CORS sunucu bağlantısı kuruldu.",
+    "ConnectionInfo": "CORS sunucu bağlantısı: ",
+    "ConnectionLost": "CORS sunucu bağlantı koptu: ",
     "ConnectionError": "Bağlantı hatası",
-    "Reconnecting": "CRISPYCREME servislerine yeniden bağlanıyor...",
-    "ConnectionSlow": "CRISPYCREME sunucu bağlantı kalitesi düşük...",
-    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" :"CRISPYCREME API Servislerine Bağlantınız Kesilmiştir !"
+    "Reconnecting": "CORS servislerine yeniden bağlanıyor...",
+    "ConnectionSlow": "CORS sunucu bağlantı kalitesi düşük...",
+    "CONNECTIONTOROPNGAPISERVICENOTAVAILIBLE" :"CORS API Servislerine Bağlantınız Kesilmiştir !"
   },
   "OrderType": {
     "Paket": "Paket",
@@ -4784,9 +4780,8 @@
     "SendDate": "Gönderim Zamanı",
     "fk_ObjectUpdate_id": "fk_ObjectUpdate_id",
     "transmittedOracle": "Oracle iletildi",
-    "ATMID": "Atm No",
-    "DepositedAmount": "Bankaya Yatırılan Tutar",
-    "AC_CostCenter": "Masraf Merkezi"
+    "ATMID":"Atm No",
+    "DepositedAmount":"Bankaya Yatırılan Tutar"
   },
   "DriversTransactions": {
     "DriverName": "Sürücü Adı",
@@ -4804,46 +4799,6 @@
     "TotalDays": "Toplam Gün Sayısı",
     "UndeliveredOrders": "Teslim Edilmeyen Siparişler",
     "TotalAmount": "Toplam Tutar"
-  },
-  "productsalessummary": {
-    "ProductID": "Ürün ID",
-    "ProductName": "Ürün Adı",
-    "SaleSource": "Satış Kanalı",
-    "SaleType": "Satis Tipi",
-    "Quantiy": "Adet"
-  },
-  "orderpromotions": {
-    "OperationDate": "Operasyon Tarihi",
-    "OrderNumber": "Sipariş Numarası",
-    "Amount": "Tutar",
-    "OrderAmount": "Sipariş Tutarı",
-    "OrderID": "Sipariş Id",
-    "Code": "Kod",
-    "Promotion": "Promosyon",
-    "StoreName": "Restoran"
-  },
-  "inventorydeal": {
-    "Company": "Firma",
-    "CompanyID": "Firma ID",
-    "Discount": "İndirim",
-    "PaymentTerm": "Vade",
-    "ValidFrom": "Anlaşma Tarihi",
-    "ValidTo": "Anlaşma Bitiş Tarihi",
-    "StoreID": "Store"
-  },
-  "AggregatorStoreStatus":{
-    "TITLE": "reEntegrasyon Ayarları",
-    "StoreID": "StoreID",
-    "Aggregator": "Kaynak",
-    "Aggregator_Name": "Kaynak Adı",
-    "Aggregator_StoreID":"Restoran ID",
-    "Aggregator_Enabled":"Etkin",
-    "Aggregator_ServiceTime":"Servis süresi",
-    "Aggregator_sid":"Aggregator_sid",
-    "Aggregator_Status":"Durum"
   }
-  
-  
-  
   
 }

@@ -203,8 +203,8 @@ function orderCtrl($scope, $log, $filter, $timeout, $translate, $modal, SweetAle
                 //LC
                 //'<h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center text-white text-capitalize" style="background-color:#FF6600; color:item;"> {{:: item.name}} <button class="btn btn-o pull-right ti-close" ng-click="cancel()"></button></h2>' +   
                 '<orderable ng-if="OrderID" item="' + ObjectID + '" order="OrderID" orderitem="' + oi + '"class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></orderable>' +
-                '</div>' +
-                ' <div class="panel center">' +
+                 '</div>' +
+                 ' <div class="panel center">' +
                 '</div>',
             controller: 'orderproductitemsCtrl',
             size: 'lg',
@@ -238,7 +238,7 @@ function orderCtrl($scope, $log, $filter, $timeout, $translate, $modal, SweetAle
             search: "OrderID='" + (($scope._order) ? $scope._order.id : "") + "'"
         }).then(function (_orderItems) {
             $scope.orderItems = angular.copy($scope.UpdateOrderItemPersonsAndSplits(_orderItems));
-
+            $scope.GetPromotion();
             $scope.UpdateOrderTotal(_orderItems);
             $scope.CalculateItemAmountWithsubItems();
 
@@ -994,6 +994,7 @@ function orderCtrl($scope, $log, $filter, $timeout, $translate, $modal, SweetAle
         })
     };
     $scope.Promotion = [];
+    $scope.OrderPromotion = [];
     $scope.GetPromotion = function (data) {
         Restangular.all('orderpromotion').getList({
             pageNo: 1,
@@ -1001,8 +1002,10 @@ function orderCtrl($scope, $log, $filter, $timeout, $translate, $modal, SweetAle
             search: "OrderID='" + $scope.OrderID + "'"
         }).then(function (result) {
             $scope.Promotion = result;
-            $scope.LoadOrderItems();
-        }, function (response) {
+            $scope.OrderPromotion = result;
+            $scope.UpdateOrderTotal($scope.orderItems);
+            $scope.CalculateItemAmountWithsubItems();
+                }, function (response) {
             toaster.pop('error', $translate.instant('orderfile.OrderPromotionsFailedLoad'), response.data.ExceptionMessage);
         });
     };

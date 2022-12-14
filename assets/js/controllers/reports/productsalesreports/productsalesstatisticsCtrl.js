@@ -1,15 +1,14 @@
 ﻿'use strict';
 app.controller('productsalesstatisticsCtrl', productsalesstatisticsCtrl);
-function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, Restangular, localStorageService,SweetAlert, toaster, $window, $rootScope, $compile, $timeout, $location, userService, ngnotifyService, $element, NG_SETTING) {
+function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, Restangular, localStorageService, SweetAlert, toaster, $window, $rootScope, $compile, $timeout, $location, userService, ngnotifyService, $element, NG_SETTING) {
     $scope.NewDate = $filter('date')(ngnotifyService.ServerTime(), 'yyyy-MM-dd');
     var ctrl = this;
     $scope.Time = ngnotifyService.ServerTime();
     $scope.TableData = [];
     $scope.VeiwHeader = {};
-    
     if (!$rootScope.user || !$rootScope.user.UserRole || !$rootScope.user.UserRole.Name) {
         $location.path('/login/signin');
-    } 
+    }
     if (userService.userIsInRole("Admin") || userService.userIsInRole("CCMANAGER") || userService.userIsInRole("LCAdmin") || userService.userIsInRole("LC") || userService.userIsInRole("AREAMANAGER") || userService.userIsInRole("ACCOUNTING") || userService.userIsInRole("PH") || userService.userIsInRole("MarketingDepartment") || userService.userIsInRole("PHAdmin") || userService.userIsInRole("OperationDepartment") || userService.userIsInRole("FinanceDepartment")) {
         $scope.StoreID = '';
         $scope.ShowStores = true;
@@ -121,7 +120,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
             remoteOperations: true,
             store: DevExpress.data.AspNet.createStore({
                 key: "id",
-                loadUrl: NG_SETTING.apiServiceBaseUri + "/api/dxProductSales",                 
+                loadUrl: NG_SETTING.apiServiceBaseUri + "/api/dxProductSales",
                 onBeforeSend: function (method, ajaxOptions) {ajaxOptions.headers = {Authorization: 'Bearer ' + localStorageService.get('authorizationData').token};}
             }),
             filter: getFilter(),
@@ -152,9 +151,9 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
         }
         else
             return null;
-        return null
+        return null;
         return result;
-    }  
+    }
     function getFilter() {
         if ($scope.StoreID) {
             return [[["OperationDate", ">=", $scope.StartDate], "and", ["OperationDate", "<=", $scope.EndDate]], "and",["StoreID", "=", $scope.StoreID]];
@@ -163,11 +162,11 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
             var s = BuildUserStoresArray($rootScope.user.userstores);
             if (s)
                 return [[["OperationDate", ">=", $scope.StartDate], "and", ["OperationDate", "<=", $scope.EndDate]], [s]];
-            else 
+            else
                 return [["OperationDate", ">=", $scope.StartDate], "and", ["OperationDate", "<=", $scope.EndDate]];
         }
     }
-    
+
 
     $scope.LoadData = function () {
         var pivot = $("#sales").dxPivotGrid('instance');
@@ -177,11 +176,11 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
         }
         else {
             pivotDS.filter(getFilter());
-        }        
+        }
         pivotDS.reload();
         //$('#sales').dxPivotGrid('instance').getDataSource().reload();
     };
-    
+
     $scope.ProductSalesApiExcel = function () {
         location.href = NG_SETTING.apiServiceBaseUri + '/api/extendedreports/productstatisticsxls?fromDate=' + $scope.DateFromDate + '&toDate=' + $scope.DateToDate + '&StoreID=' + $scope.StoreID;
     };
@@ -201,7 +200,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
             }).then(function (result) {
                 $scope[Container] = result;
             }, function (response) {
-                toaster.pop('Warning', "Sunucu hatası", response.data.ExceptionMessage);
+                toaster.pop('Warning', $translate.instant('Server.ServerError'), response.data.ExceptionMessage);
             });
         }
     };
@@ -210,7 +209,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
             Restangular.all(EntityType).getList({}).then(function (result) {
                 $scope[Container] = result;
             }, function (response) {
-                toaster.pop('Warning', "Sunucu Hatası", response);
+                toaster.pop('Warning', $translate.instant('Server.ServerError'), response);
             });
         }
     };
@@ -221,8 +220,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
     $scope.GetOrderType = function (data) {
         $scope.OrderTypeID = data;
     };
-    $scope.FromDate = function () {
-        var item=$scope.StartDate;
+    $scope.FromDate = function (item) {
         var modalInstance = $modal.open({
             templateUrl: 'assets/views/Tools/date.html',
             controller: 'dateCtrl',
@@ -236,11 +234,10 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
         });
         modalInstance.result.then(function (item) {
             var data = new Date(item);
-            $scope.StartDate = $filter('date')(data, 'yyyy-MM-dd');
+            $scope.DateFromDate = $filter('date')(data, 'yyyy-MM-dd');
         })
     };
-    $scope.ToDate = function () {
-        var item=$scope.EndDate;
+    $scope.ToDate = function (item) {
         var modalInstance = $modal.open({
             templateUrl: 'assets/views/Tools/date.html',
             controller: 'dateCtrl',
@@ -254,7 +251,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
         });
         modalInstance.result.then(function (item) {
             var data = new Date(item);
-            $scope.EndDate = $filter('date')(data, 'yyyy-MM-dd');
+            $scope.DateToDate = $filter('date')(data, 'yyyy-MM-dd');
         })
     };
     $scope.selecttag = function (item) {
@@ -277,7 +274,7 @@ function productsalesstatisticsCtrl($scope, $filter, $modal, $log, $translate, R
         $window.history.back();
     };
 
-        $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function () {
         $element.remove();
     });
 };

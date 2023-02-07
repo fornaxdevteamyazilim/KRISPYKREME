@@ -128,7 +128,7 @@ function drivervehicleCtrl($scope, $log, $modal, $filter, SweetAlert, Restangula
     };
     $scope.loadEntities2 = function (EntityType, Container) {
         $scope.userroles = userService.getUserRoles($rootScope.user.UserRole.MemberID);
-        var DriverRoles = $filter('filter')($scope.userroles, { name: 'Rest. Driver'} | {name: 'Sürücü' }).map(function (elem) {
+        var DriverRoles = $filter('filter')($scope.userroles, { name: 'REST. DRIVER'} ).map(function (elem) {
             return elem.id;  
         }).join(",");
         if (!$scope[Container].length) {

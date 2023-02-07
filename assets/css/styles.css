@@ -222,6 +222,11 @@ h5.over-title {
   position: relative;
   width: 100%;
   overflow: hidden;
+  background-image: url('../images/CORS.png');
+  background-repeat:no-repeat;
+background-size:auto;
+background-position:center;
+  
 }
 #app .app-content {
   height: 100%;
@@ -11708,6 +11713,27 @@ border-bottom-color: transparent;
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+
+
+.btn-wides{
+  width: 124px;
+  border-radius: 15px;
+  background-color: white;
+  border-color: #9fe0ca;
+  height: 40px;
+  font-size: 20px;
+ 
+}
+/* .btn-wides:active {
+  color: #ffbf00;
+} */
+.btn-wides:focus {
+  color:white;
+  background-color: #64bf5d;
+}
+ .backgr {
+  background-image: url('../images/CORS.png');
+ }
 /*.MainScreenButton {
     background: #F6F6F6;
     background-image: -webkit-linear-gradient(top, #F6F6F6, #9E9E9E);
